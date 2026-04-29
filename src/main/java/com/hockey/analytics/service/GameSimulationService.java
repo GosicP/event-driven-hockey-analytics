@@ -24,15 +24,17 @@ public class GameSimulationService {
     private final GameRepository gameRepository;
     private final PlayerRepository playerRepository;
     private final GameEventRepository gameEventRepository;
+    private final GameEventProcessingService gameEventProcessingService;
 
     private final Random random = new Random();
 
     public GameSimulationService(GameRepository gameRepository,
                                  PlayerRepository playerRepository,
-                                 GameEventRepository gameEventRepository) {
+                                 GameEventRepository gameEventRepository, GameEventProcessingService gameEventProcessingService) {
         this.gameRepository = gameRepository;
         this.playerRepository = playerRepository;
         this.gameEventRepository = gameEventRepository;
+        this.gameEventProcessingService = gameEventProcessingService;
     }
 
     public void simulateGame(UUID gameId) {
@@ -106,7 +108,16 @@ public class GameSimulationService {
         currentTime = currentTime.plus(1, ChronoUnit.MINUTES);
         events.add(createEvent(game, EventType.GAME_ENDED, currentTime, null, null, sequence++));
 
-        gameEventRepository.saveAll(events);
+        for (GameEvent event : events) {
+            gameEventProcessingService.processEvent(event);
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new IllegalStateException("Simulation interrupted", e);
+            }
+        }
     }
 
     private GameEvent createEvent(Game game,
