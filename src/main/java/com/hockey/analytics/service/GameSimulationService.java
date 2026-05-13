@@ -109,7 +109,7 @@ public class GameSimulationService {
         events.add(createEvent(game, EventType.GAME_ENDED, currentTime, null, null, sequence++));
 
         for (GameEvent event : events) {
-            gameEventProcessingService.processEvent(event);
+            gameEventProcessingService.processNewEvent(event);
 
             try {
                 Thread.sleep(500);
