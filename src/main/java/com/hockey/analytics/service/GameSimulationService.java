@@ -1,5 +1,6 @@
 package com.hockey.analytics.service;
 
+import com.hockey.analytics.kafka.GameEventProducer;
 import com.hockey.analytics.model.*;
 import com.hockey.analytics.repository.GameEventRepository;
 import com.hockey.analytics.repository.GameRepository;
@@ -23,16 +24,18 @@ public class GameSimulationService {
 
     private final GameRepository gameRepository;
     private final PlayerRepository playerRepository;
+    private final GameEventProducer gameEventProducer;
     private final GameEventRepository gameEventRepository;
     private final GameEventProcessingService gameEventProcessingService;
 
     private final Random random = new Random();
 
     public GameSimulationService(GameRepository gameRepository,
-                                 PlayerRepository playerRepository,
+                                 PlayerRepository playerRepository, GameEventProducer gameEventProducer,
                                  GameEventRepository gameEventRepository, GameEventProcessingService gameEventProcessingService) {
         this.gameRepository = gameRepository;
         this.playerRepository = playerRepository;
+        this.gameEventProducer = gameEventProducer;
         this.gameEventRepository = gameEventRepository;
         this.gameEventProcessingService = gameEventProcessingService;
     }
@@ -40,6 +43,10 @@ public class GameSimulationService {
     public void simulateGame(UUID gameId) {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new IllegalArgumentException("Game not found: " + gameId));
+
+        if (gameEventRepository.existsByGameId(gameId)) {
+            throw new IllegalStateException("Game has already been simulated: " + gameId);
+        }
 
         List<Player> homePlayers = playerRepository.findByTeam_TeamId(game.getHomeTeam().getTeamId());
         List<Player> awayPlayers = playerRepository.findByTeam_TeamId(game.getAwayTeam().getTeamId());
@@ -109,7 +116,7 @@ public class GameSimulationService {
         events.add(createEvent(game, EventType.GAME_ENDED, currentTime, null, null, sequence++));
 
         for (GameEvent event : events) {
-            gameEventProcessingService.processNewEvent(event);
+            gameEventProducer.send(event);
 
             try {
                 Thread.sleep(500);

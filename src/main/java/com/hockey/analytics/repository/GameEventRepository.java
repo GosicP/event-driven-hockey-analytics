@@ -10,4 +10,5 @@ public interface GameEventRepository extends JpaRepository<GameEvent, UUID> {
 
     List<GameEvent> findByGameIdOrderBySequenceNumber(UUID gameId);
 
+    boolean existsByGameId(UUID gameId);
 }
