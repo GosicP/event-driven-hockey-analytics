@@ -1,5 +1,6 @@
 package com.hockey.analytics.service;
 
+import com.hockey.analytics.exception.GameAlreadySimulatedException;
 import com.hockey.analytics.kafka.GameEventProducer;
 import com.hockey.analytics.model.*;
 import com.hockey.analytics.repository.GameEventRepository;
@@ -18,9 +19,9 @@ import java.util.UUID;
 @Service
 public class GameSimulationService {
 
-    private static final int EVENTS_PER_PERIOD = 8;
-    private static final int GOAL_CHANCE_PERCENT = 20;
-    private static final int PENALTY_CHANCE_PERCENT = 10;
+    private static final int EVENTS_PER_PERIOD = 20;
+    private static final int GOAL_CHANCE_PERCENT = 10;
+    private static final int PENALTY_CHANCE_PERCENT = 8;
 
     private final GameRepository gameRepository;
     private final PlayerRepository playerRepository;
@@ -45,7 +46,7 @@ public class GameSimulationService {
                 .orElseThrow(() -> new IllegalArgumentException("Game not found: " + gameId));
 
         if (gameEventRepository.existsByGameId(gameId)) {
-            throw new IllegalStateException("Game has already been simulated: " + gameId);
+            throw new GameAlreadySimulatedException(gameId);
         }
 
         List<Player> homePlayers = playerRepository.findByTeam_TeamId(game.getHomeTeam().getTeamId());
