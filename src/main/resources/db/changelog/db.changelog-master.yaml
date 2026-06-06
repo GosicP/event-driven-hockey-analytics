@@ -21,3 +21,5 @@ databaseChangeLog:
       file: db/changelog/changes/010-update-player-positions.sql
   - include:
       file: db/changelog/changes/011-create-player-game-stats.sql
+  - include:
+      file: db/changelog/changes/012-add-scoring-weight.yaml

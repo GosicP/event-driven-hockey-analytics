@@ -65,10 +65,7 @@ public class GameEventProcessingService {
 
         switch (event.getEventType()) {
             case SHOT -> stats.setShots(stats.getShots() + 1);
-            case GOAL -> {
-                stats.setGoals(stats.getGoals() + 1);
-                stats.setShots(stats.getShots() + 1);
-            }
+            case GOAL -> stats.setGoals(stats.getGoals() + 1);
             case PENALTY -> stats.setPenalties(stats.getPenalties() + 1);
             default -> {
             }
@@ -107,10 +104,7 @@ public class GameEventProcessingService {
         switch (event.getEventType()) {
             case SHOT -> stats.setShots(stats.getShots() + 1);
 
-            case GOAL -> {
-                stats.setGoals(stats.getGoals() + 1);
-                stats.setShots(stats.getShots() + 1);
-            }
+            case GOAL -> stats.setGoals(stats.getGoals() + 1);
 
             case PENALTY -> stats.setPenalties(stats.getPenalties() + 1);
 

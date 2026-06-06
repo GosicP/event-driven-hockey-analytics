@@ -1,0 +1,793 @@
+databaseChangeLog:
+  - changeSet:
+      id: 012-add-scoring-weight-column
+      author: pavle
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: players
+                columnName: scoring_weight
+      changes:
+        - addColumn:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  type: INT
+                  defaultValueNumeric: 1
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 012-update-player-scoring-weights
+      author: pavle
+      changes:
+        # Brandon Carlo (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 1
+            where: player_id = '10000000-0000-0000-0000-000000000007'
+        # Jake McCabe (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 1
+            where: player_id = '10000000-0000-0000-0000-000000000008'
+        # Morgan Rielly (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '10000000-0000-0000-0000-000000000006'
+        # Oliver Ekman-Larsson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 2
+            where: player_id = '10000000-0000-0000-0000-000000000009'
+        # Auston Matthews (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '10000000-0000-0000-0000-000000000005'
+        # John Tavares (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 8
+            where: player_id = '10000000-0000-0000-0000-000000000001'
+        # Matthew Knies (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '10000000-0000-0000-0000-000000000003'
+        # Max Domi (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 4
+            where: player_id = '10000000-0000-0000-0000-000000000004'
+        # Nicholas Robertson (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '10000000-0000-0000-0000-000000000012'
+        # William Nylander (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 10
+            where: player_id = '10000000-0000-0000-0000-000000000002'
+        # Anthony Stolarz (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '10000000-0000-0000-0000-000000000010'
+        # Joseph Woll (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '10000000-0000-0000-0000-000000000011'
+        # Kaiden Guhle (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 2
+            where: player_id = '20000000-0000-0000-0000-000000000009'
+        # Lane Hutson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '20000000-0000-0000-0000-000000000010'
+        # Mike Matheson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '20000000-0000-0000-0000-000000000007'
+        # Noah Dobson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '20000000-0000-0000-0000-000000000008'
+        # Alex Newhook (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '20000000-0000-0000-0000-000000000004'
+        # Cole Caufield (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 10
+            where: player_id = '20000000-0000-0000-0000-000000000002'
+        # Ivan Demidov (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 8
+            where: player_id = '20000000-0000-0000-0000-000000000005'
+        # Juraj Slafkovsky (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '20000000-0000-0000-0000-000000000003'
+        # Kirby Dach (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '20000000-0000-0000-0000-000000000006'
+        # Nick Suzuki (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 9
+            where: player_id = '20000000-0000-0000-0000-000000000001'
+        # Jacob Fowler (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '20000000-0000-0000-0000-000000000011'
+        # Jakub Dobes (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '20000000-0000-0000-0000-000000000012'
+        # Charlie McAvoy (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '30000000-0000-0000-0000-000000000008'
+        # Hampus Lindholm (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '30000000-0000-0000-0000-000000000009'
+        # Mason Lohrei (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '30000000-0000-0000-0000-000000000010'
+        # David Pastrnak (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '30000000-0000-0000-0000-000000000001'
+        # Elias Lindholm (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '30000000-0000-0000-0000-000000000006'
+        # Fraser Minten (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '30000000-0000-0000-0000-000000000002'
+        # Marat Khusnutdinov (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 4
+            where: player_id = '30000000-0000-0000-0000-000000000003'
+        # Morgan Geekie (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '30000000-0000-0000-0000-000000000007'
+        # Pavel Zacha (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '30000000-0000-0000-0000-000000000004'
+        # Viktor Arvidsson (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '30000000-0000-0000-0000-000000000005'
+        # Jeremy Swayman (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '30000000-0000-0000-0000-000000000011'
+        # Joonas Korpisalo (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '30000000-0000-0000-0000-000000000012'
+        # Cale Makar (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 9
+            where: player_id = '40000000-0000-0000-0000-000000000003'
+        # Devon Toews (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '40000000-0000-0000-0000-000000000004'
+        # Josh Manson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 1
+            where: player_id = '40000000-0000-0000-0000-000000000010'
+        # Samuel Girard (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '40000000-0000-0000-0000-000000000009'
+        # Artturi Lehkonen (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '40000000-0000-0000-0000-000000000005'
+        # Jonathan Drouin (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '40000000-0000-0000-0000-000000000008'
+        # Mikko Rantanen (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 12
+            where: player_id = '40000000-0000-0000-0000-000000000002'
+        # Nathan MacKinnon (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '40000000-0000-0000-0000-000000000001'
+        # Ross Colton (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '40000000-0000-0000-0000-000000000007'
+        # Valeri Nichushkin (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 8
+            where: player_id = '40000000-0000-0000-0000-000000000006'
+        # Alexandar Georgiev (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '40000000-0000-0000-0000-000000000011'
+        # Justus Annunen (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '40000000-0000-0000-0000-000000000012'
+        # Alex Vlasic (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '50000000-0000-0000-0000-000000000008'
+        # Artyom Levshunov (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '50000000-0000-0000-0000-000000000009'
+        # Sam Rinzel (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 2
+            where: player_id = '50000000-0000-0000-0000-000000000010'
+        # Anton Frondell (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '50000000-0000-0000-0000-000000000003'
+        # Connor Bedard (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 12
+            where: player_id = '50000000-0000-0000-0000-000000000001'
+        # Frank Nazar (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '50000000-0000-0000-0000-000000000004'
+        # Ryan Donato (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '50000000-0000-0000-0000-000000000006'
+        # Ryan Greene (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '50000000-0000-0000-0000-000000000002'
+        # Teuvo Teravainen (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '50000000-0000-0000-0000-000000000007'
+        # Tyler Bertuzzi (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '50000000-0000-0000-0000-000000000005'
+        # Arvid Soderblom (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '50000000-0000-0000-0000-000000000011'
+        # Spencer Knight (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '50000000-0000-0000-0000-000000000012'
+        # Connor Murphy (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 1
+            where: player_id = '60000000-0000-0000-0000-000000000010'
+        # Darnell Nurse (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '60000000-0000-0000-0000-000000000008'
+        # Evan Bouchard (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '60000000-0000-0000-0000-000000000007'
+        # Mattias Ekholm (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 2
+            where: player_id = '60000000-0000-0000-0000-000000000009'
+        # Connor Brown (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '60000000-0000-0000-0000-000000000006'
+        # Connor McDavid (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '60000000-0000-0000-0000-000000000001'
+        # Leon Draisaitl (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '60000000-0000-0000-0000-000000000002'
+        # Ryan Nugent-Hopkins (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '60000000-0000-0000-0000-000000000004'
+        # Vasili Podkolzin (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 4
+            where: player_id = '60000000-0000-0000-0000-000000000005'
+        # Zach Hyman (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 9
+            where: player_id = '60000000-0000-0000-0000-000000000003'
+        # Calvin Pickard (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '60000000-0000-0000-0000-000000000012'
+        # Tristan Jarry (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '60000000-0000-0000-0000-000000000011'
+        # Erik Karlsson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '70000000-0000-0000-0000-000000000007'
+        # Kris Letang (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '70000000-0000-0000-0000-000000000008'
+        # Parker Wotherspoon (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 1
+            where: player_id = '70000000-0000-0000-0000-000000000010'
+        # Samuel Girard (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '70000000-0000-0000-0000-000000000009'
+        # Bryan Rust (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 8
+            where: player_id = '70000000-0000-0000-0000-000000000003'
+        # Evgeni Malkin (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 10
+            where: player_id = '70000000-0000-0000-0000-000000000002'
+        # Sidney Crosby (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 12
+            where: player_id = '70000000-0000-0000-0000-000000000001'
+        # Tommy Novak (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '70000000-0000-0000-0000-000000000005'
+        # Ville Koivunen (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 4
+            where: player_id = '70000000-0000-0000-0000-000000000006'
+        # Yegor Chinakov (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '70000000-0000-0000-0000-000000000004'
+        # Arturs Silovs (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '70000000-0000-0000-0000-000000000012'
+        # Stuart Skinner (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '70000000-0000-0000-0000-000000000011'
+        # Jakob Chychrun (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 5
+            where: player_id = '80000000-0000-0000-0000-000000000010'
+        # John Carlson (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '80000000-0000-0000-0000-000000000008'
+        # Rasmus Sandin (DEFENSEMAN)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 3
+            where: player_id = '80000000-0000-0000-0000-000000000009'
+        # Aleksei Protas (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '80000000-0000-0000-0000-000000000004'
+        # Alex Ovechkin (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 13
+            where: player_id = '80000000-0000-0000-0000-000000000001'
+        # Anthony Beauvillier (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 4
+            where: player_id = '80000000-0000-0000-0000-000000000003'
+        # Connor McMichael (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '80000000-0000-0000-0000-000000000007'
+        # Dylan Strome (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 8
+            where: player_id = '80000000-0000-0000-0000-000000000002'
+        # Pierre-Luc Dubois (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 7
+            where: player_id = '80000000-0000-0000-0000-000000000005'
+        # Tom Wilson (FORWARD)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 6
+            where: player_id = '80000000-0000-0000-0000-000000000006'
+        # Charlie Lindgren (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '80000000-0000-0000-0000-000000000012'
+        # Logan Thompson (GOALIE)
+        - update:
+            tableName: players
+            columns:
+              - column:
+                  name: scoring_weight
+                  valueNumeric: 0
+            where: player_id = '80000000-0000-0000-0000-000000000011'

@@ -28,6 +28,9 @@ public class Player {
     @Column(name = "position", nullable = false)
     private PlayerPosition position;
 
+    @Column(name = "scoring_weight", nullable = false)
+    private Integer scoringWeight;
+
     public Player() {
     }
 

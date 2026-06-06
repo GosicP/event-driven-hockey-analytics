@@ -19,8 +19,8 @@ import java.util.UUID;
 @Service
 public class GameSimulationService {
 
-    private static final int EVENTS_PER_PERIOD = 20;
-    private static final int GOAL_CHANCE_PERCENT = 10;
+    private static final int EVENTS_PER_PERIOD = 22;
+    private static final int GOAL_CHANCE_PERCENT = 9;
     private static final int PENALTY_CHANCE_PERCENT = 8;
 
     private final GameRepository gameRepository;
@@ -151,29 +151,7 @@ public class GameSimulationService {
     }
 
     private Player randomSkaterForShot(List<Player> players) {
-        List<Player> forwards = players.stream()
-                .filter(player -> player.getPosition() == PlayerPosition.FORWARD)
-                .toList();
-
-        List<Player> defensemen = players.stream()
-                .filter(player -> player.getPosition() == PlayerPosition.DEFENSEMAN)
-                .toList();
-
-        boolean chooseForward = random.nextInt(100) < 75;
-
-        if (chooseForward && !forwards.isEmpty()) {
-            return randomPlayer(forwards);
-        }
-
-        if (!defensemen.isEmpty()) {
-            return randomPlayer(defensemen);
-        }
-
-        if (!forwards.isEmpty()) {
-            return randomPlayer(forwards);
-        }
-
-        throw new IllegalStateException("No skaters available for shot event.");
+        return selectWeightedSkater(players);
     }
 
     private Player randomSkaterForPenalty(List<Player> players) {
@@ -189,16 +167,59 @@ public class GameSimulationService {
     }
 
     private boolean isGoal(Player shooter) {
-        int chance = switch (shooter.getPosition()) {
+        if (shooter.getPosition() == PlayerPosition.GOALIE) {
+            return false;
+        }
+
+        int baseChance = switch (shooter.getPosition()) {
             case FORWARD -> GOAL_CHANCE_PERCENT;
-            case DEFENSEMAN -> 8;
+            case DEFENSEMAN -> Math.max(1, GOAL_CHANCE_PERCENT - 3);
             case GOALIE -> 0;
         };
 
-        return random.nextInt(100) < chance;
+        int scoringWeight = shooter.getScoringWeight() != null
+                ? shooter.getScoringWeight()
+                : 1;
+
+        int bonusChance = Math.max(0, (scoringWeight - 6) / 3);
+
+        int finalChance = Math.min(baseChance + bonusChance, 15);
+
+        return random.nextInt(100) < finalChance;
     }
 
     private Player randomPlayer(List<Player> players) {
         return players.get(random.nextInt(players.size()));
     }
+
+    private Player selectWeightedSkater(List<Player> players) {
+        List<Player> eligiblePlayers = players.stream()
+                .filter(player -> player.getPosition() != PlayerPosition.GOALIE)
+                .filter(player -> player.getScoringWeight() != null)
+                .filter(player -> player.getScoringWeight() > 0)
+                .toList();
+
+        if (eligiblePlayers.isEmpty()) {
+            throw new IllegalStateException("No eligible skaters found for event generation");
+        }
+
+        int totalWeight = eligiblePlayers.stream()
+                .mapToInt(Player::getScoringWeight)
+                .sum();
+
+        int randomValue = random.nextInt(totalWeight);
+
+        int currentWeight = 0;
+
+        for (Player player : eligiblePlayers) {
+            currentWeight += player.getScoringWeight();
+
+            if (randomValue < currentWeight) {
+                return player;
+            }
+        }
+
+        return eligiblePlayers.get(eligiblePlayers.size() - 1);
+    }
+
 }
