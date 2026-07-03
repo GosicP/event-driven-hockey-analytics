@@ -50,6 +50,7 @@ public class GameReplayService {
 
         for (GameEvent event : events) {
             gameEventProcessingService.applyEventToTeamStats(event);
+            gameEventProcessingService.applyEventToPlayerStats(event);
         }
     }
 }

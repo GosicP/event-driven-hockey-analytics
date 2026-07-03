@@ -74,7 +74,7 @@ public class GameEventProcessingService {
         teamGameStatsRepository.save(stats);
     }
 
-    private void applyEventToPlayerStats(GameEvent event) {
+    public void applyEventToPlayerStats(GameEvent event) {
 
         if (event.getPlayerId() == null || event.getTeamId() == null) {
             return;
