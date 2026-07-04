@@ -14,4 +14,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(new ApiErrorResponse("GAME_ALREADY_SIMULATED", ex.getMessage()));
     }
+
+    @ExceptionHandler(GameNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleGameNotFound(GameNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiErrorResponse("GAME_NOT_FOUND", ex.getMessage()));
+    }
 }
