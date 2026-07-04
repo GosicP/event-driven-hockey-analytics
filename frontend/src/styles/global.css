@@ -1,0 +1,387 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#root {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.state-message {
+  text-align: center;
+  color: #6b6b6b;
+  padding: 32px 0;
+}
+
+.state-error {
+  color: #c0392b;
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  text-decoration: none;
+  color: inherit;
+}
+
+.game-row:hover {
+  background-color: #fafafa;
+}
+
+.game-row-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.game-row-team {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.team-name {
+  font-size: 14px;
+}
+
+.team-score {
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 20px;
+  text-align: right;
+}
+
+.score-live {
+  color: #d32f2f;
+}
+
+.game-row-status {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: right;
+  color: #6b6b6b;
+}
+
+.status-live {
+  color: #d32f2f;
+}
+
+.status-finished {
+  color: #6b6b6b;
+}
+
+.status-scheduled {
+  color: #1565c0;
+}
+
+/* slide animacija izmedju liste i detalja - koristi native browser View Transitions API */
+.games-page-transition {
+  view-transition-name: games-page;
+}
+
+.game-details-transition {
+  view-transition-name: game-details-page;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(games-page),
+::view-transition-new(games-page),
+::view-transition-old(game-details-page),
+::view-transition-new(game-details-page) {
+  mix-blend-mode: normal;
+}
+
+@keyframes slide-out-left {
+  to { transform: translateX(-100%); }
+}
+@keyframes slide-in-from-right {
+  from { transform: translateX(100%); }
+}
+@keyframes slide-out-right {
+  to { transform: translateX(100%); }
+}
+@keyframes slide-in-from-left {
+  from { transform: translateX(-100%); }
+}
+
+::view-transition-old(games-page) {
+  animation: slide-out-left 0.25s ease-in-out both;
+}
+::view-transition-new(game-details-page) {
+  animation: slide-in-from-right 0.25s ease-in-out both;
+}
+::view-transition-old(game-details-page) {
+  animation: slide-out-right 0.25s ease-in-out both;
+}
+::view-transition-new(games-page) {
+  animation: slide-in-from-left 0.25s ease-in-out both;
+}
+
+/* stranica detalja utakmice */
+.back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #6b6b6b;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #1a1a1a;
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.scoreboard-team {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.scoreboard-score {
+  font-size: 28px;
+  font-weight: 700;
+  min-width: 100px;
+}
+
+.scoreboard-status {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b6b6b;
+}
+
+.period-score-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.period-score-table th,
+.period-score-table td {
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.period-score-table th:first-child,
+.period-score-table td:first-child {
+  text-align: left;
+}
+
+.match-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 16px;
+}
+
+.match-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b6b6b;
+  cursor: pointer;
+}
+
+.match-tab-active {
+  color: #d32f2f;
+  border-bottom-color: #d32f2f;
+}
+
+.event-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b6b6b;
+  margin-bottom: -4px;
+  cursor: pointer;
+}
+
+.timeline-period-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b6b6b;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.timeline-row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.timeline-row-home {
+  justify-content: flex-start;
+}
+
+.timeline-row-away {
+  justify-content: flex-end;
+}
+
+.timeline-event {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.timeline-row-home .timeline-event {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.timeline-row-away .timeline-event {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.timeline-player {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.timeline-type {
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
+.timeline-type-goal {
+  color: #d32f2f;
+  font-weight: 700;
+}
+
+.timeline-type-penalty {
+  color: #b8860b;
+  font-weight: 600;
+}
+
+.team-statistics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.team-statistics-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 13px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 8px;
+}
+
+.team-statistics-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team-statistics-value {
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 50px;
+  text-align: center;
+}
+
+.team-statistics-label {
+  font-size: 12px;
+  color: #6b6b6b;
+  flex: 1;
+  text-align: center;
+}
+
+.player-statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.player-statistics-table th,
+.player-statistics-table td {
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.player-statistics-table th:first-child,
+.player-statistics-table td:first-child {
+  text-align: left;
+}
+
+.player-statistics-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 24px 0 8px;
+  color: #1a1a1a;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.standings-table th:first-child,
+.standings-table td:first-child {
+  text-align: left;
+}
