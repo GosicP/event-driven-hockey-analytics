@@ -3,6 +3,7 @@ import { listGames, getTopScorers } from "../api/gamesApi";
 import GameRow from "../components/GameRow";
 import StandingsTable from "../components/StandingsTable";
 import PlayerStatistics from "../components/PlayerStatistics";
+import CollapsibleSection from "../components/CollapsibleSection";
 
 const POLL_INTERVAL_MS = 3000;
 
@@ -57,11 +58,13 @@ function GamesPage() {
             ))}
           </div>
 
-          <h2 className="section-title">Standings</h2>
-          <StandingsTable games={games} />
+          <CollapsibleSection title="Standings">
+            <StandingsTable games={games} />
+          </CollapsibleSection>
 
-          <h2 className="section-title">Top Scorers</h2>
-          <PlayerStatistics playerStats={topScorers} />
+          <CollapsibleSection title="Top Scorers">
+            <PlayerStatistics playerStats={topScorers} />
+          </CollapsibleSection>
         </>
       )}
     </div>
