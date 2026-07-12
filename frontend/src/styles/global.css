@@ -320,6 +320,12 @@ body {
 
 .team-statistics-row {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.team-statistics-numbers {
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
@@ -336,6 +342,22 @@ body {
   color: #6b6b6b;
   flex: 1;
   text-align: center;
+}
+
+.team-statistics-bar {
+  display: flex;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: #e5e5e5;
+}
+
+.team-statistics-bar-home {
+  background: #d32f2f;
+}
+
+.team-statistics-bar-away {
+  background: #1a1a1a;
 }
 
 .player-statistics-table {

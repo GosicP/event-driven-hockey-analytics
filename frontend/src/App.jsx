@@ -1,15 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import GamesPage from "./pages/GamesPage";
 import GameDetailsPage from "./pages/GameDetailsPage";
 
-function App() {
-  return (
-    // / -> lista utakmica, /games/:id -> detalji jedne
-    <Routes>
-      <Route path="/" element={<GamesPage />} />
-      <Route path="/games/:gameId" element={<GameDetailsPage />} />
-    </Routes>
-  );
-}
+// data router (ne <BrowserRouter>) - potrebno da viewTransition stvarno radi
+const router = createBrowserRouter([
+  { path: "/", element: <GamesPage /> },
+  { path: "/games/:gameId", element: <GameDetailsPage /> },
+]);
 
-export default App;
+export default router;
