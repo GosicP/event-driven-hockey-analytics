@@ -169,6 +169,38 @@ body {
   flex: 1;
   font-size: 16px;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.team-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.team-badge-small {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.team-badge-large {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.game-row-team-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .scoreboard-score {
@@ -432,4 +464,42 @@ body {
 .standings-table th:first-child,
 .standings-table td:first-child {
   text-align: left;
+}
+
+.simulate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.simulate-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.simulate-form-field select {
+  padding: 8px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.simulate-form button {
+  align-self: flex-start;
+  padding: 8px 16px;
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.simulate-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

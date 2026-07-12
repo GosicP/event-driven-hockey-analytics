@@ -33,3 +33,7 @@ export function getGameStats(gameId) {
 export function getTopScorers() {
   return fetch(`${API_BASE_URL}/players/top-scorers`).then(handleResponse);
 }
+
+export function simulateGame(gameId) {
+  return fetch(`${API_BASE_URL}/games/${gameId}/simulate`, { method: "POST" }).then(handleResponse);
+}

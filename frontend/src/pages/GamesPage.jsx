@@ -4,6 +4,7 @@ import GameRow from "../components/GameRow";
 import StandingsTable from "../components/StandingsTable";
 import PlayerStatistics from "../components/PlayerStatistics";
 import CollapsibleSection from "../components/CollapsibleSection";
+import SimulateGameForm from "../components/SimulateGameForm";
 
 const POLL_INTERVAL_MS = 3000;
 
@@ -50,7 +51,7 @@ function GamesPage() {
       {!loading && !error && games.length === 0 && (
         <p className="state-message">No games found.</p>
       )}
-      {!loading && !error && games.length > 0 && (
+      {!loading && !error && games.length > 0 && ( //za svaki mec koji postoji (4 poziva), napravi jednu gameRow komponentu
         <>
           <div className="games-list">
             {games.map((game) => (
@@ -64,6 +65,10 @@ function GamesPage() {
 
           <CollapsibleSection title="Top Scorers">
             <PlayerStatistics playerStats={topScorers} />
+          </CollapsibleSection>
+
+          <CollapsibleSection title="Simulate Game">
+            <SimulateGameForm games={games} />
           </CollapsibleSection>
         </>
       )}
