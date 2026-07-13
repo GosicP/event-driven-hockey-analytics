@@ -8,7 +8,6 @@ function TeamStatistics({ teamStats, homeTeamId, awayTeamId }) {
     return <p className="state-message">No statistics available.</p>;
   }
 
-  // golman "brani" sve suteve protivnika koji nisu zavrsili kao gol
   const homeSaves = away.shots - away.goals;
   const awaySaves = home.shots - home.goals;
 
@@ -61,7 +60,6 @@ function TeamStatistics({ teamStats, homeTeamId, awayTeamId }) {
   );
 }
 
-// zajednicka formula: udeo jedne vrednosti u zbiru dve, za sirinu bara
 function percentValue(numerator, denominator) {
   if (!denominator) {
     return 0;

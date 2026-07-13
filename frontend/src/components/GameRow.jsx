@@ -7,7 +7,6 @@ function GameRow({ game }) {
   const isLive = game.status === "IN_PROGRESS";
 
   return (
-    // viewTransition - klik okine slide animaciju ka detaljima
     <Link to={`/games/${game.id}`} viewTransition className="game-row">
       <div className="game-row-teams">
         <div className="game-row-team">
@@ -15,7 +14,6 @@ function GameRow({ game }) {
             <TeamBadge teamName={game.homeTeam.name} />
             <span className="team-name">{game.homeTeam.name}</span>
           </span>
-          {/* zakazana utakmica - nema smisla prikazivati 0-0 */}
           {!isScheduled && (
             <span className={`team-score ${isLive ? "score-live" : ""}`}>
               {game.homeScore}

@@ -10,7 +10,7 @@ export function computeStandings(games) {
 
   for (const game of games) {
     if (game.status !== "FINISHED") {
-      continue; // samo odigrane utakmice ulaze u poredak
+      continue;
     }
 
     const home = getOrCreate(game.homeTeam.id, game.homeTeam.name);
@@ -39,7 +39,6 @@ export function computeStandings(games) {
     }
   }
 
-  // sortiraj po poenima, pa po gol razlici kao tie-breaker
   return [...teams.values()].sort((a, b) => {
     if (b.pts !== a.pts) return b.pts - a.pts;
     return (b.gf - b.ga) - (a.gf - a.ga);

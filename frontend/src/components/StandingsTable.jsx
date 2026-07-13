@@ -4,7 +4,7 @@ function StandingsTable({ games }) {
   const standings = computeStandings(games);
 
   if (standings.length === 0) {
-    return null; // nema zavrsenih utakmica jos
+    return null;
   }
 
   return (

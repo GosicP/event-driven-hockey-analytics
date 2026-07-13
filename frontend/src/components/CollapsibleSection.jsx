@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function CollapsibleSection({ title, children }) {
-  const [isOpen, setIsOpen] = useState(false); // zatvoreno po difoltu
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="collapsible-section">

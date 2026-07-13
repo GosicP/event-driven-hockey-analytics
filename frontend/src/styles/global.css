@@ -93,7 +93,6 @@ body {
   color: #1565c0;
 }
 
-/* slide animacija izmedju liste i detalja - koristi native browser View Transitions API */
 .games-page-transition {
   view-transition-name: games-page;
 }
@@ -141,7 +140,6 @@ body {
   animation: slide-in-from-left 0.25s ease-in-out both;
 }
 
-/* stranica detalja utakmice */
 .back-link {
   display: inline-block;
   margin-bottom: 12px;

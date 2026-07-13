@@ -1,6 +1,5 @@
 function PeriodScoreTable({ details }) {
   const periods = [1, 2, 3];
-  // period -> {period, homeScore, awayScore}, za brzo trazenje po broju trecine
   const scoresByPeriod = new Map(details.periodScores.map((p) => [p.period, p]));
 
   return (
@@ -19,7 +18,6 @@ function PeriodScoreTable({ details }) {
           <td>{details.homeTeam.name}</td>
           {periods.map((period) => {
             const score = scoresByPeriod.get(period);
-            // trecina koja jos nije odigrana - crtica umesto 0
             return <td key={period}>{score ? score.homeScore : "–"}</td>;
           })}
           <td>{details.homeTeam.score}</td>

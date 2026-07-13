@@ -35,12 +35,12 @@ function GamesPage() {
         });
     }
 
-    fetchData(); // prvo ucitavanje - loading spinner
-    const intervalId = setInterval(fetchData, POLL_INTERVAL_MS); // tihi refresh
+    fetchData();
+    const intervalId = setInterval(fetchData, POLL_INTERVAL_MS);
 
     return () => {
       cancelled = true;
-      clearInterval(intervalId); // prekini polling kad se stranica napusti
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -51,7 +51,7 @@ function GamesPage() {
       {!loading && !error && games.length === 0 && (
         <p className="state-message">No games found.</p>
       )}
-      {!loading && !error && games.length > 0 && ( //za svaki mec koji postoji (4 poziva), napravi jednu gameRow komponentu
+      {!loading && !error && games.length > 0 && (
         <>
           <div className="games-list">
             {games.map((game) => (

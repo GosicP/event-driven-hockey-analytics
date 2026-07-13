@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function EventTimeline({ events, periodScores, homeTeamId }) {
-  const [showShots, setShowShots] = useState(false); // sutevi sakriveni po difoltu
+  const [showShots, setShowShots] = useState(false);
 
   const relevantEvents = events.filter((event) => {
     if (event.type === "SHOT") {
@@ -18,7 +18,6 @@ function EventTimeline({ events, periodScores, homeTeamId }) {
 
   return (
     <div className="event-timeline">
-      {/* checkbox mora uvek biti vidljiv, ne sme da nestane i kad su svi eventi filtrirani */}
       <label className="timeline-toggle">
         <input
           type="checkbox"
@@ -70,7 +69,6 @@ function EventRow({ event, isHome }) {
   );
 }
 
-// gol pokazuje rezultat posle sebe, faul/sut samo naziv - nema trajanja/razloga u bazi
 function formatEventLabel(event) {
   if (event.type === "GOAL") {
     return `GOAL — ${event.homeScoreAfterEvent}:${event.awayScoreAfterEvent}`;

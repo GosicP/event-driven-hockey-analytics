@@ -12,8 +12,6 @@ function SimulateGameForm({ games }) {
       return;
     }
 
-    // simulacija traje ~35s na backend-u (moze i da ne uspe ako je utakmica
-    // vec simulirana) - ne cekamo je, vec odmah prelazimo na stranicu utakmice
     simulateGame(gameId).catch((err) => console.error("Simulacija nije uspela:", err));
     navigate(`/games/${gameId}`, { viewTransition: true });
   }

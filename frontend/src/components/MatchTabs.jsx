@@ -2,7 +2,6 @@ function MatchTabs({ tabs, activeTab, onChange }) {
   return (
     <div className="match-tabs">
       {tabs.map((tab) => (
-        // button umesto div - tastatura (Tab + Enter) radi bez dodatnog koda
         <button
           key={tab.key}
           type="button"

@@ -10,7 +10,6 @@ function Scoreboard({ details }) {
         <TeamBadge teamName={details.homeTeam.name} size="large" />
         <span>{details.homeTeam.name}</span>
       </div>
-      {/* pre pocetka nema rezultata, samo "vs" */}
       <div className="scoreboard-score">
         {isScheduled ? "vs" : `${details.homeTeam.score} - ${details.awayTeam.score}`}
       </div>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { formatShootingPercentage } from "../utils/format";
 
-// samo G/S/PIM su sortabilne, ostalo je tekst
 const COLUMNS = [
   { key: "playerName", label: "Player", sortable: false },
   { key: "teamName", label: "Team", sortable: false },
@@ -15,7 +14,6 @@ function PlayerStatistics({ playerStats }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDirection, setSortDirection] = useState("desc");
 
-  // kopija niza pre sort() - ne diraj originalni prop
   const sortedStats = [...playerStats].sort((a, b) => {
     if (!sortKey) {
       return 0;
@@ -29,7 +27,6 @@ function PlayerStatistics({ playerStats }) {
       return;
     }
     if (sortKey === column.key) {
-      // isti klik drugi put - obrni smer
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortKey(column.key);
